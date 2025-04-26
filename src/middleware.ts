@@ -1,5 +1,7 @@
 import { auth } from "@/app/auth";
 
+export const runtime = "nodejs"; // Force Node.js runtime for Mongoose compatibility
+
 export default auth((req) => {
   //   if (!req.auth && req.nextUrl.pathname !== "/login") {
   if (!req.auth && req.nextUrl.pathname !== "/") {
