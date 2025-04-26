@@ -1,6 +1,10 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 
+import { saveUserToDatabase } from "@/lib/db";
+
+export const runtime = "nodejs";
+
 declare module "next-auth" {
   interface Session {
     githubId?: string;
@@ -19,13 +23,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!account?.providerAccountId) {
           throw new Error("GitHub account data is missing");
         }
-        // Save user data to the database
-        // await saveUserToDatabase({
-        //     name: user.name,
-        //     email: user.email,
-        //     image: user.image || "",
-        //     githubId: account.providerAccountId,
-        //   });
+        await saveUserToDatabase({
+          name: user.name || "",
+          email: user.email || "",
+          image: user.image || "",
+          githubId: account.providerAccountId,
+        });
 
         return true; // Allow sign-in
       } catch (error) {
