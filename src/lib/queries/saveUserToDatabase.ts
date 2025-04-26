@@ -1,7 +1,7 @@
-import { connectToDatabase } from "./mongodb";
-import { getUserModel } from "../models/User";
+import { connectToDatabase } from "@/lib/mongodb";
+import { getUserModel } from "@/models/User";
 
-export async function saveUserToDatabase({
+const saveUserToDatabase = async function saveUserToDatabase({
   name,
   email,
   image,
@@ -32,7 +32,9 @@ export async function saveUserToDatabase({
 
     return user;
   } catch (error) {
-    console.log(error);
-    throw new Error(`Failed to save user:`);
+    console.log("Failed to save user:", error);
+    throw new Error("Failed to save user.");
   }
-}
+};
+
+export default saveUserToDatabase;

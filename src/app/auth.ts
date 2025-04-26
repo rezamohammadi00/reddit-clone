@@ -1,9 +1,7 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 
-import { saveUserToDatabase } from "@/lib/db";
-
-export const runtime = "nodejs";
+import saveUserToDatabase from "@/lib/queries/saveUserToDatabase";
 
 declare module "next-auth" {
   interface Session {

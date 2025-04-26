@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 interface IUser extends Document {
-  id: string;
   name: string;
   email: string;
   image: string;
@@ -12,7 +11,7 @@ interface IUser extends Document {
 
 const UserSchema: Schema = new Schema(
   {
-    name: { type: String },
+    name: { type: String, require: true },
     email: { type: String, required: true, unique: true },
     image: { type: String, required: true },
     githubId: { type: String, required: true, unique: true },
@@ -22,7 +21,6 @@ const UserSchema: Schema = new Schema(
   }
 );
 
-// Export a function to get the User model after connection
 export function getUserModel() {
   return mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
 }
