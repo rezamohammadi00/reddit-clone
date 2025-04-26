@@ -1,15 +1,16 @@
-import { auth } from "@/app/auth"
-import { ServerSignOutBtn } from "@/components/authBtn/ServerSignOutBtn"
+import { ClientSignOutBtn } from "@/components/authBtn/ClientSignOutBtn"
 import { redirect } from "next/navigation"
+
+import { auth } from "@/app/auth"
 
 
 const DashboardPage = async () => {
     const session = await auth()
-    console.log("DashboardPage",session)
+    console.log("DashboardPage", session)
 
     if (!session) redirect("/")
     return (
-        <div><ServerSignOutBtn /></div>
+        <div><ClientSignOutBtn /></div>
     )
 }
 
